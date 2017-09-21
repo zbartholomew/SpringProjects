@@ -8,3 +8,5 @@
 - Utilizing Spring Boot REST backend
 - ReactJS frontend
 - To run the app, make sure you have Maven installed and run this command **./mvnw spring-boot:run**
+- http://localhost:8080/   --> displays employees
+- http://localhost:8080/api/ --> displays api
