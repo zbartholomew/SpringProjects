@@ -1,10 +1,11 @@
 package com.zbartholomew.springdatarestdemo.payroll;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
- * The repository extends Spring Data Commons' CrudRepository
- * and plugs in the type of the domain object and its primary key
+ * The repository extends PagingAndSortingRepository which adds extra options to set page size,
+ * and also adds navigational links to hop from page to page.
  */
-public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
 }
