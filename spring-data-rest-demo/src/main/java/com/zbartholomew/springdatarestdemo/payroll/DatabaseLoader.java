@@ -14,15 +14,20 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private final EmployeeRepository repository;
 
-    // Constructor injection and autowiring to get Spring Data’s automatically created EmployeeRepository
+    // Constructor injection and autowiring to get Spring Data automatically created EmployeeRepository
     @Autowired
     public DatabaseLoader(EmployeeRepository repository) {
         this.repository = repository;
     }
 
-    // This method is invoked with command line arguments, loading up your data
+    // This method is invoked with command line arguments, loading up the data
     @Override
     public void run(String... strings) throws Exception {
         this.repository.save(new Employee("Zach", "Cheese", "Manager"));
+        this.repository.save(new Employee("John", "Smith", "Employee"));
+        this.repository.save(new Employee("Bob", "Thorton", "Driver"));
+        this.repository.save(new Employee("Bill", "Pots", "Receptionist"));
+        this.repository.save(new Employee("Joe", "Pechy", "Security"));
+        this.repository.save(new Employee("Kevin", "Freeton", "CEO"));
     }
 }
