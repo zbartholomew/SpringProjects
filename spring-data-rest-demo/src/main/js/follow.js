@@ -1,4 +1,5 @@
 /**
+ * Goes to the employees collection resource.
  * Allows you to start from the root and navigate to where you need.
  *
  * @param api       - client object used to make REST calls.
