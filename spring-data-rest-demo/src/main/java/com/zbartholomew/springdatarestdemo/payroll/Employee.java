@@ -3,7 +3,10 @@ package com.zbartholomew.springdatarestdemo.payroll;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Version;
 
 /**
  * This entity is used to track employee information. In this case, their name and job description.
@@ -20,9 +23,6 @@ public class Employee {
     private String lastName;
     private String description;
 
-    @ManyToOne
-    private Manager manager;
-
     @Version // causes a value to be automatically stored and updated everytime a row is inserted and updated.
     @JsonIgnore
     private Long version;
@@ -30,10 +30,9 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String description, Manager manager) {
+    public Employee(String firstName, String lastName, String description) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
-        this.manager = manager;
     }
 }

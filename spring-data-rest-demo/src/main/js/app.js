@@ -43,20 +43,6 @@ class App extends React.Component { // create a React component
                 headers: {'Accept': 'application/schema+json'}
                 //  store the metadata and navigational links in the <App/>
             }).then(schema => {
-                /**
-                 * Filter unneeded JSON Schema properties, like uri references and
-                 * subtypes ($ref).
-                 */
-                Object.keys(schema.entity.properties).forEach(function (property) {
-                    if (schema.entity.properties[property].hasOwnProperty('format') &&
-                        schema.entity.properties[property].format === 'uri') {
-                        delete schema.entity.properties[property];
-                    }
-                    else if (schema.entity.properties[property].hasOwnProperty('$ref')) {
-                        delete schema.entity.properties[property];
-                    }
-                });
-
                 this.schema = schema.entity;
                 this.links = employeeCollection.entity._links;
                 return employeeCollection;
@@ -64,7 +50,7 @@ class App extends React.Component { // create a React component
             // Converts the collection of employees into an array of GET promises to fetch each individual resource.
             // This is what we will need to fetch an ETag header for each employee.
         }).then(employeeCollection => {
-            this.page = employeeCollection.entity.page;
+			this.page = employeeCollection.entity.page;
             return employeeCollection.entity._embedded.employees.map(employee =>
                 client({
                     method: 'GET',
@@ -78,7 +64,7 @@ class App extends React.Component { // create a React component
             // The UI state is updated using this combination of data.
         }).done(employees => {
             this.setState({
-                page: this.page,
+				page: this.page,
                 employees: employees,
                 attributes: Object.keys(this.schema.properties),
                 pageSize: pageSize,
@@ -103,8 +89,8 @@ class App extends React.Component { // create a React component
                 path: response.entity._links.self.href,
                 entity: newEmployee,
                 headers: {'Content-Type': 'application/json'}
-            });
-        });
+            })
+        })
     }
 
     /**
@@ -112,15 +98,7 @@ class App extends React.Component { // create a React component
      * @param employee
      */
     onDelete(employee) {
-        client({method: 'DELETE', path: employee.entity._links.self.href}
-        ).done(response => {/* let the websocket handle updating the UI */
-            },
-            response => {
-                if (response.status.code === 403) {
-                    alert('ACCESS DENIED: You are not authorized to delete ' +
-                        employee.entity._links.self.href);
-                }
-		});
+		client({method: 'DELETE', path: employee.entity._links.self.href});
     }
 
     /**
@@ -133,7 +111,7 @@ class App extends React.Component { // create a React component
             path: navUri
         }).then(employeeCollection => {
             this.links = employeeCollection.entity._links;
-            this.page = employeeCollection.entity.page;
+			this.page = employeeCollection.entity.page;
 
             return employeeCollection.entity._embedded.employees.map(employee =>
                 client({
@@ -145,7 +123,7 @@ class App extends React.Component { // create a React component
             return when.all(employeePromises);
         }).done(employees => {
             this.setState({
-                page: this.page,
+				page: this.page,
                 employees: employees,
                 attributes: Object.keys(this.schema.properties),
                 pageSize: this.state.pageSize,
@@ -173,13 +151,9 @@ class App extends React.Component { // create a React component
         }).done(response => {
             /* Let the websocket handler update the state */
         }, response => {
-            if (response.status.code === 403) {
-                alert('ACCESS DENIED: You are not authorized to update ' +
-                    employee.entity._links.self.href);
-            }
             if (response.status.code === 412) {
-                alert('DENIED: Unable to update ' + employee.entity._links.self.href +
-                    '. Your copy is stale.');
+                alert('DENIED: Unable to update ' +
+                    employee.entity._links.self.href + '. Your copy is stale.');
             }
         });
     }
@@ -205,7 +179,7 @@ class App extends React.Component { // create a React component
             } else {
                 this.onNavigate(response.entity._links.self.href);
             }
-        });
+        })
     }
 
     // callback used to update UI state when WebSocket event is received
@@ -224,7 +198,7 @@ class App extends React.Component { // create a React component
                 return client({
                     method: 'GET',
                     path: employee._links.self.href
-                });
+                })
             });
         }).then(employeePromises => {
             return when.all(employeePromises);
@@ -255,8 +229,8 @@ class App extends React.Component { // create a React component
         return (
             <div>
                 <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
-                <EmployeeList page={this.state.page}
-                              employees={this.state.employees}
+				<EmployeeList page={this.state.page}
+							  employees={this.state.employees}
                               links={this.state.links}
                               pageSize={this.state.pageSize}
                               attributes={this.state.attributes}
@@ -265,7 +239,7 @@ class App extends React.Component { // create a React component
                               onDelete={this.onDelete}
                               updatePageSize={this.updatePageSize}/>
             </div>
-        );
+        )
     }
 }
 
@@ -329,7 +303,7 @@ class CreateDialog extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
@@ -368,7 +342,7 @@ class UpdateDialog extends React.Component {
         const dialogId = "updateEmployee-" + this.props.employee.entity._links.self.href;
 
         return (
-            <div>
+			<div>
                 <a href={"#" + dialogId}>Update</a>
                 <div id={dialogId} className="modalDialog">
                     <div>
@@ -383,7 +357,7 @@ class UpdateDialog extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
@@ -436,10 +410,10 @@ class EmployeeList extends React.Component {
     /* -------------- Navigation methods ---------------- */
 
     render() {
-        const pageInfo = this.props.page.hasOwnProperty("number") ?
-            <h3>Employees - Page {this.props.page.number + 1} of {this.props.page.totalPages}</h3> : null;
+		const pageInfo = this.props.page.hasOwnProperty("number") ?
+			<h3>Employees - Page {this.props.page.number + 1} of {this.props.page.totalPages}</h3> : null;
 
-        const employees = this.props.employees.map(employee =>
+		const employees = this.props.employees.map(employee =>
             <Employee key={employee.entity._links.self.href}
                       employee={employee}
                       attributes={this.props.attributes}
@@ -463,7 +437,7 @@ class EmployeeList extends React.Component {
 
         return (
             <div>
-                {pageInfo}
+				{pageInfo}
                 <input ref="pageSize" defaultValue={this.props.pageSize} onInput={this.handleInput}/>
                 <table>
                     <tbody>
@@ -471,7 +445,6 @@ class EmployeeList extends React.Component {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Description</th>
-                        <th>Manager</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -482,7 +455,7 @@ class EmployeeList extends React.Component {
                     {navLinks}
                 </div>
             </div>
-        );
+        )
     }
 }
 
@@ -506,7 +479,6 @@ class Employee extends React.Component {
                 <td>{this.props.employee.entity.firstName}</td>
                 <td>{this.props.employee.entity.lastName}</td>
                 <td>{this.props.employee.entity.description}</td>
-                <td>{this.props.employee.entity.manager.name}</td>
                 <td>
                     <UpdateDialog employee={this.props.employee}
                                   attributes={this.props.attributes}
@@ -516,7 +488,7 @@ class Employee extends React.Component {
                     <button onClick={this.handleDelete}>Delete</button>
                 </td>
             </tr>
-        );
+		)
     }
 }
 
