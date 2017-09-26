@@ -61,6 +61,29 @@
 					<td><form:checkbox path="like" value="yes"/>Like</td>
 				</tr>
 				<tr>
+					<td><form:label path="optionalServices">Optional Services Subscription:</form:label></td>
+					<td>
+						<form:checkbox path="optionalServices" value="emailService"/>${subscriptionList.emailService}
+						<form:checkbox path="optionalServices" value="promotionService"/>${subscriptionList.promotionService}
+						<form:checkbox path="optionalServices" value="newsLetterService"/>${subscriptionList.newsLetterService}
+					</td>
+				</tr>
+				<tr>
+					<td><form:label path="premiumServices">Premium Services</form:label></td>
+					<td><form:checkboxes path="premiumServices" items="${premiumServicesList}"/></td>
+				</tr>
+				<tr>
+					<td><form:label path="overseaOperations">Overseas Operations?</form:label></td>
+					<td>
+						<form:radiobutton path="overseaOperations" value="Yes"/>Yes
+						<form:radiobutton path="overseaOperations" value="No"/>No
+					</td>
+				</tr>
+				<tr>
+					<td><form:label path="employeeStrength">Employee Count</form:label></td>
+					<td><form:radiobuttons path="employeeStrength" items="${employeeStrengthList}"/></td>
+				</tr>
+				<tr>
 					<td />
 					<td align="center"><input type="submit" value="Submit" /></td>
 				</tr>

@@ -51,6 +51,34 @@
 				<c:otherwise><b>Do not like</b></c:otherwise>
 			</c:choose>
 		</h3>
+		<h3>Optional Services Signed up for:
+			<c:forEach var="entry1" items="${subscriptionList}">
+				<c:forEach var="entry2" items="${orgreg.optionalServices}">
+					<c:if test="${entry2 eq entry1.key}">
+						<c:set var="optService" scope="request" value="${optService}${entry1.value}, " />
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+			<b>${optService.substring(0, optService.length() - 2)}</b>
+		</h3>
+		<h3>Premium Services Signed up for:
+			<c:forEach var="entry1" items="${premiumServicesList}">
+				<c:forEach var="entry2" items="${orgreg.premiumServices}">
+					<c:if test="${entry2 eq entry1.key}">
+						<c:set var="premiumService" scope="request" value="${premiumService}${entry1.value}, " />
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+			<b>${premiumService.substring(0, premiumService.length() - 2)}</b>
+		</h3>
+		<h3>Has Overseas Operations: <b>${orgreg.overseaOperations }</b></h3>
+		<h3>Employee Count:
+			<c:forEach var="entry" items="${employeeStrengthList}">
+				<c:if test="${orgreg.employeeStrength eq entry.key}">
+					<b>${entry.value}</b>
+				</c:if>
+			</c:forEach>
+		</h3>
 	</div>
 </body>
 </html>

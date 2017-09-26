@@ -20,7 +20,8 @@
 		<a href="${contextPath}/requestMappingAndParamDemo/home" style="font-size: 20px">Click here to go to the test bed for @RequestMapping and @RequestParam annotations</a><br/>
 		<a href="${contextPath}/home4" style="font-size: 20px">Click here to go to the test bed for @Model Attribute annotation</a><br/>
 		<a href="${contextPath}/visitorRegister/home" style="font-size: 20px">Click here to go to the test bed for @Session Attribute annotation</a><br/>
-		<a href="${contextPath}/formTagsDemo/home" style="font-size: 20px">Click here to go to the test bed for Form Tags</a>
+		<a href="${contextPath}/formTagsDemo/home" style="font-size: 20px">Click here to go to the test bed for Form Tags</a><br/>
+		<a href="${contextPath}/formValidationDemo/home" style="font-size: 20px">Click here to go to the test bed for Form Validation</a>
 	</div>		
 </body>
 </html>
