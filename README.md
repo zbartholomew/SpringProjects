@@ -18,4 +18,7 @@
 ************
 ![fromtagstestbed](https://user-images.githubusercontent.com/16873263/30838127-92745194-a21e-11e7-8150-c11eb9f3f00a.JPG)
 
-
+## spring-security-and-angular-js
+- Spring Security web app with AngularJS frontend
+- Utilizes wro4j - https://github.com/wro4j/wro4j
+  - Is a Java-based toolchain for preprocessing and packaging front end assets
