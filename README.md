@@ -22,3 +22,9 @@
 - Spring Security web app with AngularJS frontend
 - Utilizes wro4j - https://github.com/wro4j/wro4j
   - Is a Java-based toolchain for preprocessing and packaging front end assets
+
+## spring-boot-security-mysql-login
+- mvn spring-boot:run
+- Utilizes Spring Boot, Spring Security, Spring MVC, JPA, MySQL, Thymeleaf
+- Encrypted password storage
+- See README.md inside folder for screenshots
