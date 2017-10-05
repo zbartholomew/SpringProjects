@@ -6,7 +6,7 @@
     <groupId>com.zbartholomew</groupId>
     <artifactId>spring-security-and-angular-js</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>spring-security-and-angular-js</name>
     <description>Demo project for Spring Boot</description>
