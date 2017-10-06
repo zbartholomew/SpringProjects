@@ -22,6 +22,10 @@
 - Spring Security web app with AngularJS frontend
 - Utilizes wro4j - https://github.com/wro4j/wro4j
   - Is a Java-based toolchain for preprocessing and packaging front end assets
+- Created UI and resource servers that do not have a common origin, so they cannot share cookies (even though we can use Spring Session to force them to share sessions).
+- Utilizes redis server via docker.  Use 'docker-compose up' to launch redis server.
+- This app so far is a home page with a greeting fetched from a remote backend, with login and logout links in a navigation bar. The greeting comes from a resource server that is a standalone, instead of being embedded in the UI server.
+- Used Spring Session here to share sessions between 2 servers that are not logically the same application. It’s a neat trick, and it isn’t possible with "regular" JEE distributed sessions.
 
 ## spring-boot-security-mysql-login
 - mvn spring-boot:run
